@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>數據總覽｜RoadSafe AI</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="src/main.js" defer></script>
+</head>
+<body>
+
+<header class="site-header scrolled" id="header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html"><i data-lucide="shield-alert"></i><span>RoadSafe AI</span></a>
+    <nav class="nav-links">
+      <a href="index.html">首頁</a><a href="menu.html">分析目錄</a><a href="overview.html">數據總覽</a><a href="hotspots.html">路段地圖</a><a href="prediction.html">AI 預測</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" style="padding-top: 140px;">
+  <div class="container">
+    <div class="eyebrow reveal"><i data-lucide="bar-chart-3"></i> 統計摘要</div>
+    <h1 class="section-title reveal">斗六市事故數據總覽</h1>
+    <p class="section-desc reveal">基於公開資料整理的交通事故統計摘要，涵蓋路段、時段、車種與肇因分析。</p>
+
+    <!-- KPI Cards -->
+    <div class="bento-grid" style="margin-bottom: 48px;">
+      <div class="bento-card reveal">
+        <div class="icon-wrap"><i data-lucide="car-crash"></i></div>
+        <h3 style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">248</h3>
+        <p>近一年事故總件數</p>
+      </div>
+      <div class="bento-card reveal stagger-1">
+        <div class="icon-wrap"><i data-lucide="alert-triangle"></i></div>
+        <h3 style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">8</h3>
+        <p>高風險路段數量</p>
+      </div>
+      <div class="bento-card reveal stagger-2">
+        <div class="icon-wrap"><i data-lucide="clock"></i></div>
+        <h3 style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">17:00–19:00</h3>
+        <p>事故最高發時段</p>
+      </div>
+      <div class="bento-card wide reveal stagger-1">
+        <div class="icon-wrap"><i data-lucide="cloud-rain"></i></div>
+        <h3>天候影響分析</h3>
+        <p>雨天事故率比晴天高出 38%，霧天則高出 52%。建議雨天加強路面標線與減速標誌。</p>
+      </div>
+      <div class="bento-card reveal stagger-2">
+        <div class="icon-wrap"><i data-lucide="bike"></i></div>
+        <h3>機車事故佔比</h3>
+        <p style="font-size: 28px; font-weight: 800; margin: 8px 0;">62%</p>
+        <p>機車為最大事故族群</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="bento-grid" id="time">
+      <div class="bento-card wide reveal">
+        <h3 style="margin-bottom: 16px;">各時段事故件數</h3>
+        <div style="height: 260px;">
+          <canvas id="hourChart"></canvas>
+        </div>
+      </div>
+      <div class="bento-card reveal stagger-1">
+        <h3 style="margin-bottom: 16px;">事故車種分佈</h3>
+        <div style="height: 220px;">
+          <canvas id="vehicleChart"></canvas>
+        </div>
+      </div>
+      <div class="bento-card reveal stagger-2">
+        <h3 style="margin-bottom: 16px;">天候分佈</h3>
+        <div style="height: 220px;">
+          <canvas id="weatherChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cause Table -->
+    <div class="bento-card wide reveal" style="margin-top: 16px;">
+      <h3 style="margin-bottom: 20px;">主要肇因排名</h3>
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
+          <thead>
+            <tr style="color:var(--text-muted); text-align:left; border-bottom:1px solid var(--border);">
+              <th style="padding:10px 12px;">排名</th>
+              <th style="padding:10px 12px;">肇因</th>
+              <th style="padding:10px 12px;">件數</th>
+              <th style="padding:10px 12px;">佔比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px; color:var(--text-muted);">1</td><td style="padding:10px 12px;">未保持行車安全距離</td><td style="padding:10px 12px;">58</td><td style="padding:10px 12px;">23.4%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px; color:var(--text-muted);">2</td><td style="padding:10px 12px;">未注意車前狀況</td><td style="padding:10px 12px;">47</td><td style="padding:10px 12px;">18.9%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px; color:var(--text-muted);">3</td><td style="padding:10px 12px;">違反號誌管制</td><td style="padding:10px 12px;">32</td><td style="padding:10px 12px;">12.9%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px; color:var(--text-muted);">4</td><td style="padding:10px 12px;">迴轉未依規定</td><td style="padding:10px 12px;">21</td><td style="padding:10px 12px;">8.5%</td></tr>
+            <tr><td style="padding:10px 12px; color:var(--text-muted);">5</td><td style="padding:10px 12px;">超速失控</td><td style="padding:10px 12px;">18</td><td style="padding:10px 12px;">7.3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border);">
+  <div class="container">RoadSafe AI · 斗六市交通事故安全診斷專題</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+
+  initBarChart('hourChart',
+    ['00-03','03-06','06-09','09-12','12-15','15-18','18-21','21-24'],
+    [8, 5, 22, 28, 35, 58, 42, 20],
+    '件數',
+    'rgba(99,102,241,0.7)'
+  );
+
+  initDoughnutChart('vehicleChart',
+    ['機車','小客車','小貨車','腳踏車','其他'],
+    [62, 22, 8, 5, 3],
+    ['#6366f1','#818cf8','#a5b4fc','#c4b5fd','#e0e7ff']
+  );
+
+  initDoughnutChart('weatherChart',
+    ['晴','陰','雨','霧','其他'],
+    [142, 48, 38, 12, 8],
+    ['#fbbf24','#94a3b8','#3b82f6','#94a3b8','#64748b']
+  );
+});
+</script>
+</body>
+</html>

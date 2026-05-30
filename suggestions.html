@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>改善建議｜RoadSafe AI</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="src/main.js" defer></script>
+</head>
+<body>
+
+<header class="site-header scrolled" id="header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html"><i data-lucide="shield-alert"></i><span>RoadSafe AI</span></a>
+    <nav class="nav-links">
+      <a href="index.html">首頁</a><a href="menu.html">分析目錄</a><a href="overview.html">數據總覽</a><a href="hotspots.html">路段地圖</a><a href="prediction.html">AI 預測</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" style="padding-top: 140px;">
+  <div class="container">
+    <div class="eyebrow reveal"><i data-lucide="clipboard-list"></i> 規則引擎輸出</div>
+    <h1 class="section-title reveal">交通安全改善建議</h1>
+    <p class="section-desc reveal">以下建議由本地規則引擎根據分析結果自動生成，無需呼叫外部 LLM API。</p>
+
+    <div class="bento-grid" id="suggestions-grid">
+      <!-- JS will populate -->
+    </div>
+
+    <div class="bento-card wide reveal" style="margin-top: 16px;">
+      <h3 style="margin-bottom: 12px;">建議生成邏輯</h3>
+      <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.8;">
+        本系統採用<strong>本地規則引擎</strong>生成建議，運作方式如下：<br>
+        1. 根據預測模型輸出的危險指數分級（高/中/低）匹配對應策略模板。<br>
+        2. 根據天氣條件觸發額外建議（如雨天加強標線、霧天加強照明）。<br>
+        3. 根據事故肇因類型匹配特定改善措施（如機車擦撞 → 設置待轉區）。<br>
+        4. 所有內容均為預設模板組合，不經由生成式 AI 即時撰寫，確保可解釋性與一致性。
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer style="padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border);">
+  <div class="container">RoadSafe AI · 斗六市交通事故安全診斷專題</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+
+  const preds = generatePredictions('rainy'); // Default to rainy for richer suggestions
+  const suggestions = generateSuggestions(preds);
+
+  const grid = document.getElementById('suggestions-grid');
+  const iconMap = {
+    'alert-triangle': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+    'cloud-rain': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></svg>',
+    'clock': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    'users': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
+  };
+
+  grid.innerHTML = suggestions.map((s, i) => `
+    <div class="bento-card reveal stagger-${Math.min(i+1,5)}">
+      <div class="icon-wrap"><i data-lucide="${s.icon}"></i></div>
+      <h3>${s.title}</h3>
+      <p>${s.desc}</p>
+    </div>
+  `).join('');
+
+  lucide.createIcons();
+});
+</script>
+</body>
+</html>

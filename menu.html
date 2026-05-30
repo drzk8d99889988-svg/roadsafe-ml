@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>分析目錄｜RoadSafe AI</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="src/main.js" defer></script>
+</head>
+<body>
+
+<header class="site-header scrolled" id="header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <i data-lucide="shield-alert"></i>
+      <span>RoadSafe AI</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">首頁</a>
+      <a href="menu.html">分析目錄</a>
+      <a href="overview.html">數據總覽</a>
+      <a href="hotspots.html">路段地圖</a>
+      <a href="prediction.html">AI 預測</a>
+    </nav>
+  </div>
+</header>
+
+<section style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 140px 24px 80px;">
+  <div style="text-align:center; margin-bottom: 60px;">
+    <h1 class="section-title reveal">分析目錄</h1>
+    <p class="section-desc reveal" style="margin: 0 auto;">選擇以下主題進入對應的分析頁面</p>
+  </div>
+
+  <div class="glass-icons-grid reveal stagger-1">
+    <a href="overview.html" class="glass-icon-btn">
+      <span class="glass-icon-btn__back" style="background: linear-gradient(135deg, #6366f1, #4f46e5);"></span>
+      <span class="glass-icon-btn__front"><i data-lucide="layout-dashboard"></i></span>
+      <span class="glass-icon-btn__label">數據總覽</span>
+    </a>
+    <a href="hotspots.html" class="glass-icon-btn">
+      <span class="glass-icon-btn__back" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></span>
+      <span class="glass-icon-btn__front"><i data-lucide="map-pin"></i></span>
+      <span class="glass-icon-btn__label">路段分析</span>
+    </a>
+    <a href="prediction.html" class="glass-icon-btn">
+      <span class="glass-icon-btn__back" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"></span>
+      <span class="glass-icon-btn__front"><i data-lucide="brain-circuit"></i></span>
+      <span class="glass-icon-btn__label">AI 預測</span>
+    </a>
+    <a href="suggestions.html" class="glass-icon-btn">
+      <span class="glass-icon-btn__back" style="background: linear-gradient(135deg, #10b981, #059669);"></span>
+      <span class="glass-icon-btn__front"><i data-lucide="clipboard-list"></i></span>
+      <span class="glass-icon-btn__label">改善建議</span>
+    </a>
+    <a href="overview.html#time" class="glass-icon-btn">
+      <span class="glass-icon-btn__back" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></span>
+      <span class="glass-icon-btn__front"><i data-lucide="clock"></i></span>
+      <span class="glass-icon-btn__label">時段分析</span>
+    </a>
+    <a href="prediction.html#weather" class="glass-icon-btn">
+      <span class="glass-icon-btn__back" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"></span>
+      <span class="glass-icon-btn__front"><i data-lucide="cloud-sun"></i></span>
+      <span class="glass-icon-btn__label">天氣關聯</span>
+    </a>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+});
+</script>
+</body>
+</html>
